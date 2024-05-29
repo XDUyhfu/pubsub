@@ -1,18 +1,14 @@
 import "reflect-metadata";
 import { injectable } from "inversify";
-import { ReplaySubject } from "rxjs";
-import { container, Symbols } from "./container.ts";
-import { Broker } from "./broker.ts";
+import { TopicProxy } from "./proxy.ts";
+import { Subject } from "rxjs";
 
 @injectable()
-export class Subscriber<T = unknown> {
-  receiver: ReplaySubject<any>;
-  broker: Broker<T>;
+export class Subscriber {
+  receiver: Subject<any>;
 
-  constructor() {
-    this.broker = container.get<Broker<T>>(Symbols.Broker);
-    this.receiver = new ReplaySubject(0);
-
-    this.broker.sender.subscribe(this.receiver);
+  constructor(topicProxy: TopicProxy) {
+    this.receiver = new Subject();
+    topicProxy.getReceiver().subscribe(this.receiver);
   }
 }
