@@ -23,7 +23,7 @@ export class Client<T = unknown> {
   }
 
   subscribe(topic: string, callback: (payload: T) => void) {
-    this.#subscriber.receiver
+    return this.#subscriber.receiver
       .pipe(
         filter(
           (message: { topic: string; payload: T }) => message.topic === topic,
