@@ -38,6 +38,7 @@ export class TopicProxy<T = unknown> {
   hasSubscribe() {
     if (!this.#hasSubscribe) {
       this.#control$.next(true);
+      this.#control$.complete();
       this.#hasSubscribe = true;
     }
   }
