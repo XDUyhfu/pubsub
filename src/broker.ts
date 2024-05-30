@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { injectable } from "inversify";
-import { Subject } from "rxjs";
+import { ReplaySubject, Subject } from "rxjs";
 
 @injectable()
 export class Broker<T = unknown> {
@@ -9,7 +9,7 @@ export class Broker<T = unknown> {
 
   constructor() {
     this.receiver = new Subject();
-    this.sender = new Subject();
+    this.sender = new ReplaySubject(10);
     // 最简单的模型 直接传递数据
     this.receiver.subscribe(this.sender);
   }

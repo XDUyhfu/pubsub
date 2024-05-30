@@ -10,10 +10,10 @@ describe("client", () => {
     const client3 = container.get<Client<{ message: string }>>(Symbols.Client);
     const client4 = container.get<Client<{ message: string }>>(Symbols.Client);
 
-    client1.publish("/test", { message: "test" });
-    client2.publish("/test", { message: "test" });
-    client3.publish("/test", { message: "test" });
-    client4.publish("/test", { message: "test" });
+    client1.publish("/test", { message: "test1" });
+    client2.publish("/test", { message: "test2" });
+    client3.publish("/test", { message: "test3" });
+    client4.publish("/test", { message: "test4" });
 
     const client5 = container.get<Client<{ message: string }>>(Symbols.Client);
     client5.subscribe("/test", (payload) => {
@@ -26,9 +26,9 @@ describe("client", () => {
       // expect(payload.message).toBe("test");
     });
 
-    client4.publish("/test", { message: "test" });
-    client4.publish("/test", { message: "test" });
-    client4.publish("/test", { message: "test" });
+    client4.publish("/test", { message: "test5" });
+    client4.publish("/test", { message: "test6" });
+    client4.publish("/test", { message: "test7" });
   });
 
   // test("client pub sub instance", () => {

@@ -11,7 +11,7 @@ export class TopicProxy<T = unknown> {
   broker: Broker<T>;
 
   #topic: string = "/test";
-  #control$ = new Subject();
+  #control$ = new Subject<boolean>();
 
   #hasSubscribe = false;
 
@@ -38,7 +38,6 @@ export class TopicProxy<T = unknown> {
   hasSubscribe() {
     if (!this.#hasSubscribe) {
       this.#control$.next(true);
-      this.#control$.complete();
       this.#hasSubscribe = true;
     }
   }
